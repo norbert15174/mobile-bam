@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserActivity">
+            android:name=".UserActivity"
+            android:exported="false">
         </activity>
     </application>
 
