@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class UserActivity : AppCompatActivity() {
 
@@ -39,6 +43,13 @@ class UserActivity : AppCompatActivity() {
 
     fun stop(v: View?) {
         stopService(Intent(baseContext, CounterService::class.java))
+    }
+
+    fun showDB(v: View?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val size = DatabaseSingleton.getDatabase(applicationContext).dataDao().getAll().size
+            Log.d("UserActivity", "table size $size")
+        }
     }
 
 }
